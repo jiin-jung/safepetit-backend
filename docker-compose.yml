@@ -1,0 +1,15 @@
+services:
+  app:
+    image: ${DOCKER_IMAGE:-safepetit/safepetit:latest}
+    container_name: safepetit-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-prod}
+    networks:
+      - safepetit-network
+
+networks:
+  safepetit-network:
+    driver: bridge
