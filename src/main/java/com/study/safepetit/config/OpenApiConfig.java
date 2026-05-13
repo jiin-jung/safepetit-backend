@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenApiConfig {
 
+    // 단순 소개 문서: 추후에 수정 바람
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
