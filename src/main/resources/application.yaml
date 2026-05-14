@@ -2,6 +2,7 @@ spring:
   application:
     name: safepetit
 
+
   # DB 없이 우선 배포하기 위한 임시 H2 설정
   datasource:
     url: jdbc:h2:mem:testdb
@@ -12,3 +13,6 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
+
+gemini:
+  api-key: AIzaSyA8RDaEmDQFjSOs1u_W9SzjTmju1a9nKT4
