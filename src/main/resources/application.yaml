@@ -15,4 +15,4 @@ spring:
       ddl-auto: update
 
 gemini:
-  api-key: ${제미나이키}
+  api-key: ${GEMINI_API_KEY}
