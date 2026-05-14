@@ -17,10 +17,19 @@ public class AnalysisController {
 
     @PostMapping
     public ResponseEntity<AnalysisResponseDto> analyze(
-            @RequestPart("request") AnalysisRequestDto request,
+            @RequestParam Integer childAgeMonth,
+            @RequestParam Double childHeight,
+            @RequestParam String childGender,
             @RequestPart("image") MultipartFile image
     ) {
+        AnalysisRequestDto request = new AnalysisRequestDto();
+
+        request.setChildAgeMonth(childAgeMonth);
+        request.setChildHeight(childHeight);
+        request.setChildGender(childGender);
+
         String result = geminiService.analyzeSafety(request, image);
+
         return ResponseEntity.ok(new AnalysisResponseDto(result));
     }
 }
