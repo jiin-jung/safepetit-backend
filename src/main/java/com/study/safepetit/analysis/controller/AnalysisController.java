@@ -13,13 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/analysis")
-
 public class AnalysisController {
+
     private final GeminiService geminiService;
 
-    @PostMapping(
-            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
-    )
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "이미지 안전 분석")
     public ResponseEntity<AnalysisResponseDto> analyze(
             @RequestParam Integer childAgeMonth,
@@ -33,13 +31,10 @@ public class AnalysisController {
         request.setChildHeight(childHeight);
         request.setChildGender(childGender);
 
-        String result = geminiService.analyzeSafety(request, image);
+        AnalysisResponseDto result = geminiService.analyzeSafety(request, image);
 
-        return ResponseEntity.ok(new AnalysisResponseDto(result));
+        return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/health")
-    public String health() {
-        return "ok";
-    }
+
 }
