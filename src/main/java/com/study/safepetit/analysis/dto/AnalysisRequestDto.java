@@ -3,11 +3,13 @@ package com.study.safepetit.analysis.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-    @Getter
+import java.time.LocalDate;
+
+@Getter
     @Setter
     public class AnalysisRequestDto {
 
-        private Integer childAgeMonth;
+        private LocalDate birthDate;
 
         private Double childHeight;
 

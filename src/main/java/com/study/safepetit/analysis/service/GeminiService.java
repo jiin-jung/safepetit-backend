@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Base64;
 import java.util.Map;
 
@@ -26,6 +28,7 @@ public class GeminiService {
     public AnalysisResponseDto analyzeSafety(AnalysisRequestDto dto, MultipartFile image) {
         try {
             String base64Image = Base64.getEncoder().encodeToString(image.getBytes());
+            int childAgeMonth = calculateMonthAge(dto.getBirthDate());
 
             String prompt = """
                     당신은 영유아 주거 환경 안전 분석 전문가입니다.
@@ -67,7 +70,7 @@ public class GeminiService {
                     - solutions는 최대 3개까지만 작성하세요.
                     - recommended_items는 최대 2개까지만 작성하세요.
                     """.formatted(
-                    dto.getChildAgeMonth(),
+                    childAgeMonth,
                     dto.getChildHeight(),
                     dto.getChildGender()
             );
@@ -123,5 +126,9 @@ public class GeminiService {
                 .replace("```json", "")
                 .replace("```", "")
                 .trim();
+    }
+    private int calculateMonthAge(LocalDate birthDate) {
+        return Period.between(birthDate, LocalDate.now()).getYears() * 12
+                + Period.between(birthDate, LocalDate.now()).getMonths();
     }
 }
