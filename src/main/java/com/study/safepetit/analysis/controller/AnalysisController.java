@@ -15,6 +15,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "https://ideaton-team1-frontend-6hkc.vercel.app")
 @RequestMapping("/api/analysis")
 public class AnalysisController {
 
